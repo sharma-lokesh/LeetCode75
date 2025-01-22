@@ -1,0 +1,25 @@
+class Solution {
+    public String reverseWords(String s) {
+        String res = "";
+        int j=0;
+        s = deleteExtraSpaces(s);
+        for(int i=0; i<s.length(); i++){
+            if(s.charAt(i) == ' '){
+                res = s.substring(j,i)+" "+res;
+                j=i+1;
+            }
+        }
+        res = s.substring(j,s.length())+" "+res;
+        return res.trim();
+    }
+
+    public String deleteExtraSpaces(String str){
+        StringBuilder sb=new StringBuilder();
+        for(String s: str.split(" ")){
+            if(!s.equals("")){
+                sb.append(s+" ");
+            }
+        }
+        return new String(sb.toString());
+    }
+}
