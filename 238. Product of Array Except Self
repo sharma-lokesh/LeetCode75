@@ -1,0 +1,55 @@
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int totalProduct = 1;
+        int zerocount = 0;
+        int[] res = new int[nums.length];
+        for(int a : nums){
+            totalProduct = a*totalProduct;
+            if(a == 0){
+              zerocount++;
+            }
+        }
+        if(totalProduct == 0){
+            if(zerocount>1){
+                Arrays.fill(res,0);
+                return res;
+            }else{
+                int result = productWithoutZero(nums);
+                for(int i=0; i<nums.length; i++){
+                    if(nums[i]!=0){
+                        res[i] = 0;
+                    }else{
+                        res[i] = result;
+                    }
+                }
+            }
+        }else{
+            for(int i=0; i<nums.length; i++){
+                res[i] = totalProduct/nums[i];
+            }
+        }
+
+
+        /*int[] prefix = new int[nums.length];
+        int[] suffix = new int[nums.length];
+        prefix[0] = nums[0];
+        suffix[nums.length-1] = nums[nums.length-1];
+        for(int i=i; i<nums.length; i++){
+            prefix[i] = nums[i]*prefix[i-1];
+        }
+        for(int i=nums.length-1; i>0; i--){
+            sufix[i] = nums[i]*prefix[i-1];
+        }*/
+
+        return res;
+    }
+    public int productWithoutZero(int[] arr){
+        int res=1;
+        for(int x : arr){
+            if(x!=0){
+                res = res*x;
+            }
+        }
+        return res;
+    }
+}
