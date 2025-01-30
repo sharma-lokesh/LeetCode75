@@ -1,0 +1,59 @@
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        /*int result = 0;
+        for(int i=0; i<nums.length;i++){
+            if(k == 0){
+                break;
+            }
+            if(k>0 && nums[i] == 0){
+                k--;
+            }
+            result++;
+        }
+
+        System.out.println(result);
+
+        int finalResult = result;
+        int start = 0;
+        int end = result;
+        while(end < nums.length){
+            if(nums[start] == 1){
+                if(k>0){
+                    result++;
+                    k--;
+                }else{
+                    result--;
+                }
+            }
+            if(nums[end] == 1 && nums[start] == 0){
+                k++;
+            }
+            finalResult = Math.max(result, finalResult);
+            start++;
+            end++;
+        }
+
+        return finalResult;*/
+
+        int finalResult = 0;
+        int zeroCount = 0;
+        int left = 0;
+
+        for (int right = 0; right < nums.length; right++) {
+            if (nums[right] == 0) {
+                zeroCount++;
+            }
+
+            while (zeroCount > k) {
+                if (nums[left] == 0) {
+                    zeroCount--;
+                }
+                left++;
+            }
+            //to calculate length of subarray --> right-left+1
+            finalResult = Math.max(finalResult, right - left + 1);
+        }
+
+        return finalResult;
+    }
+}
